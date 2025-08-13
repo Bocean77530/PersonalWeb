@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Nathan N Hexa Badge">
+  <title>Nathan — N Hexa Badge</title>
+  <!-- dark tile so it reads on any tab color -->
+  <rect width="256" height="256" rx="40" fill="#0f1115"/>
+  <!-- hex outline -->
+  <g transform="translate(28,28)">
+    <path d="M100 0l72 42v84l-72 42-72-42V42z" fill="none" stroke="#00e5ff" stroke-width="12"/>
+    <!-- N monogram -->
+    <path d="M56 152V40l96 112V40" fill="none" stroke="#e6e6e6" stroke-linecap="round" stroke-width="18"/>
+  </g>
+</svg>

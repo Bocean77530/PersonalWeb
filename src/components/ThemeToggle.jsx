@@ -1,4 +1,4 @@
-import { Moon, Sun } from "lucide-react";
+import { Moon, Sun, ArrowUp } from "lucide-react";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
@@ -29,10 +29,12 @@ export const ThemeToggle = () => {
   };
 
   return (
+    <div className="fixed flex flex-col bottom-4 right-4 z-50">
+    
     <button
       onClick={toggleTheme}
       className={cn(
-        "fixed max-sm:hidden top-5 right-5 z-50 p-2 rounded-full transition-colors duration-300",
+        "mb-4 rounded-full transition-colors duration-300",
         "focus:outlin-hidden"
       )}
     >
@@ -42,5 +44,15 @@ export const ThemeToggle = () => {
         <Moon className="h-6 w-6 text-blue-900" />
       )}
     </button>
+    <div className="p-0.5">
+      <a
+        href="#hero"
+        className="rounded-full  text-primary transition-colors"
+      >
+        <ArrowUp size={20}/>
+      </a>
+    </div>
+    
+    </div>
   );
 };
