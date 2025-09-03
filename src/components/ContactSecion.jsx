@@ -1,7 +1,8 @@
 
 import {
   Instagram,
-  Linkedin,
+  LinkedinIcon,
+  Github,
   Mail,
   MapPin,
   Phone,
@@ -17,18 +18,51 @@ export const ContactSection = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
     setIsSubmitting(true);
 
-    setTimeout(() => {
-      toast({
-        title: "Message sent!",
-        description: "Thank you for your message. I'll get back to you soon.",
+    const formData = new FormData(e.target);
+    const data = {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      message: formData.get('message'),
+    };
+
+    try {
+      const response = await fetch('http://localhost:3001/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
       });
+
+      const result = await response.json();
+
+      if (result.success) {
+        toast({
+          title: "Message sent!",
+          description: "Thank you for your message. I'll get back to you soon.",
+        });
+        e.target.reset(); // Clear the form
+      } else {
+        toast({
+          title: "Error",
+          description: result.message || "Failed to send message. Please try again.",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      console.error('Error sending message:', error);
+      toast({
+        title: "Error",
+        description: "Failed to send message. Please check your connection and try again.",
+        variant: "destructive",
+      });
+    } finally {
       setIsSubmitting(false);
-    }, 1500);
+    }
   };
   return (
     <section id="contact" className="py-24 px-4 relative bg-secondary/30">
@@ -60,7 +94,7 @@ export const ContactSection = () => {
                     href="mailto:nathan.tang.ms@gmail.com"
                     className="text-muted-foreground hover:text-primary transition-colors"
                   >
-                    nathan.tang.ms@gmail.com
+                    nathan.ms.tang@gmail.com
                   </a>
                 </div>
               </div>
@@ -74,7 +108,7 @@ export const ContactSection = () => {
                     href="tel:+61435181843"
                     className="text-muted-foreground hover:text-primary transition-colors"
                   >
-                    +61 435 181 843
+                    +61 435 381 843
                   </a>
                 </div>
               </div>
@@ -85,7 +119,7 @@ export const ContactSection = () => {
                 <div>
                   <h4 className="font-medium"> Location</h4>
                   <a className="text-muted-foreground hover:text-primary transition-colors">
-                    Canberra
+                    Australia
                   </a>
                 </div>
               </div>
@@ -94,18 +128,14 @@ export const ContactSection = () => {
             <div className="pt-8">
               <h4 className="font-medium mb-4"> Connect With Me</h4>
               <div className="flex space-x-4 justify-center">
-                <a href="#" target="_blank">
-                  <Linkedin />
+                <a href="https://www.linkedin.com/in/mingsheng-tang-626325217/" target="_blank">
+                  <LinkedinIcon />
                 </a>
-                <a href="#" target="_blank">
-                  <Twitter />
+                <a href="https://github.com/Bocean77530" target="_blank">
+                  <Github />
                 </a>
-                <a href="#" target="_blank">
-                  <Instagram />
-                </a>
-                <a href="#" target="_blank">
-                  <Twitch />
-                </a>
+              
+                
               </div>
             </div>
           </div>
